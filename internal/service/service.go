@@ -23,6 +23,8 @@ func NewProductService(repository repository.IProductRepository) IProductService
 }
 
 func (service *ProductService) Save(product *models.Product) (*models.Product, error) {
+	product.ID = uuid.New()
+
 	newProduct, err := service.repository.Create(product)
 	if err != nil {
 		return nil, err
@@ -50,7 +52,12 @@ func (service *ProductService) GetAllProduct() (*[]models.Product, error) {
 }
 
 func (service *ProductService) UpdateProduct(id uuid.UUID, product *models.Product) (*models.Product, error) {
-	newProduct, err := service.repository.Update(id, product)
+	_, err := service.repository.Update(id, product)
+	if err != nil {
+		return nil, err
+	}
+
+	newProduct, err := service.repository.GetById(id)
 	if err != nil {
 		return nil, err
 	}
