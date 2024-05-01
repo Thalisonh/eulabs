@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Thalisonh/eulabs.git/pkg/server"
+	"github.com/Thalisonh/eulabs.git/internal/api/server"
 )
 
 func main() {
