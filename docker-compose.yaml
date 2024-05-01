@@ -1,0 +1,18 @@
+version: '3.1'
+
+networks:
+  eulabs_network:
+
+services:
+  mysql:
+    image: 'mysql:8.0'
+    working_dir: /application
+    volumes:
+      - '.:/application'
+    environment:
+      - MYSQL_ROOT_PASSWORD=eulabs
+      - MYSQL_DATABASE=eulabs
+      - MYSQL_USER=eulabs
+      - MYSQL_PASSWORD=eulabs
+    ports:
+      - '3304:3306'

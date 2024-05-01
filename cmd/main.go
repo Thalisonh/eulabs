@@ -8,9 +8,9 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// @title Swagger Example API
+// @title Swagger Eulabs API
 // @version 1.0
-// @description This is a sample server Petstore server.
+// @description This is a sample server.
 // @termsOfService http://swagger.io/terms/
 
 // @contact.name API Support
