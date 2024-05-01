@@ -1,12 +1,14 @@
 package handler
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/Thalisonh/eulabs.git/internal/service"
 	"github.com/Thalisonh/eulabs.git/pkg/models"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
 )
 
 type IProductHandler interface {
@@ -48,6 +50,10 @@ func (handler *ProductHandler) GetProductById(c echo.Context) error {
 
 	product, err := handler.service.GetProductById(id)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return c.JSON(http.StatusNotFound, "")
+		}
+
 		return c.JSON(http.StatusInternalServerError, "")
 	}
 

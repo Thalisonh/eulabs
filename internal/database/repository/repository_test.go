@@ -1,8 +1,9 @@
-package repository
+package repository_test
 
 import (
 	"testing"
 
+	"github.com/Thalisonh/eulabs.git/internal/database/repository"
 	"github.com/Thalisonh/eulabs.git/pkg/models"
 	"github.com/glebarez/sqlite"
 	"github.com/google/uuid"
@@ -201,7 +202,7 @@ func TestGetAll(t *testing.T) {
 	})
 }
 
-func testDatabase() (*gorm.DB, IProductRepository) {
+func testDatabase() (*gorm.DB, repository.IProductRepository) {
 	db, err := gorm.Open(sqlite.Open(":memory:?_pragma=foreign_keys(1)"), &gorm.Config{})
 	if err != nil {
 		return nil, nil
@@ -209,5 +210,5 @@ func testDatabase() (*gorm.DB, IProductRepository) {
 
 	db.AutoMigrate(&models.Product{})
 
-	return db, NewProductRepository(db)
+	return db, repository.NewProductRepository(db)
 }
