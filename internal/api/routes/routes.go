@@ -6,6 +6,7 @@ import (
 	"github.com/Thalisonh/eulabs.git/internal/database/repository"
 	"github.com/Thalisonh/eulabs.git/internal/service"
 	"github.com/labstack/echo/v4"
+	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 func Routes(e *echo.Echo) {
@@ -19,4 +20,6 @@ func Routes(e *echo.Echo) {
 	e.GET("/products", handler.GetAllProduct)
 	e.PUT("/products/:id", handler.UpdateProduct)
 	e.DELETE("/products/:id", handler.DeleteProduct)
+
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 }
