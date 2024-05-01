@@ -1,15 +1,13 @@
 package models
 
 import (
-	"time"
+	"github.com/google/uuid"
 )
 
 type Product struct {
-	ID          uint
+	ID          uuid.UUID
 	Name        string
 	Description string
 	Price       float32
 	Active      bool
-	CreatedAt   time.Time
-	UpdateAt    *time.Time
 }
