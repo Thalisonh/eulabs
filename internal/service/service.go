@@ -3,14 +3,15 @@ package service
 import (
 	"github.com/Thalisonh/eulabs.git/internal/database/repository"
 	"github.com/Thalisonh/eulabs.git/pkg/models"
+	"github.com/google/uuid"
 )
 
 type IProductService interface {
 	Save(product *models.Product) (*models.Product, error)
-	GetProductById(id int) (*models.Product, error)
+	GetProductById(id uuid.UUID) (*models.Product, error)
 	GetAllProduct() (*[]models.Product, error)
-	UpdateProduct(id int, product *models.Product) (*models.Product, error)
-	DeleteProduct(id int) error
+	UpdateProduct(id uuid.UUID, product *models.Product) (*models.Product, error)
+	DeleteProduct(id uuid.UUID) error
 }
 
 type ProductService struct {
@@ -30,7 +31,7 @@ func (service *ProductService) Save(product *models.Product) (*models.Product, e
 	return newProduct, nil
 }
 
-func (service *ProductService) GetProductById(id int) (*models.Product, error) {
+func (service *ProductService) GetProductById(id uuid.UUID) (*models.Product, error) {
 	product, err := service.repository.GetById(id)
 	if err != nil {
 		return nil, err
@@ -48,7 +49,7 @@ func (service *ProductService) GetAllProduct() (*[]models.Product, error) {
 	return products, nil
 }
 
-func (service *ProductService) UpdateProduct(id int, product *models.Product) (*models.Product, error) {
+func (service *ProductService) UpdateProduct(id uuid.UUID, product *models.Product) (*models.Product, error) {
 	newProduct, err := service.repository.Update(id, product)
 	if err != nil {
 		return nil, err
@@ -57,7 +58,7 @@ func (service *ProductService) UpdateProduct(id int, product *models.Product) (*
 	return newProduct, nil
 }
 
-func (service *ProductService) DeleteProduct(id int) error {
+func (service *ProductService) DeleteProduct(id uuid.UUID) error {
 	err := service.repository.Delete(id)
 	if err != nil {
 		return err

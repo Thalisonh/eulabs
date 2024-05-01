@@ -2,10 +2,10 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/Thalisonh/eulabs.git/internal/service"
 	"github.com/Thalisonh/eulabs.git/pkg/models"
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -41,7 +41,7 @@ func (handler *ProductHandler) AddProduct(c echo.Context) error {
 }
 
 func (handler *ProductHandler) GetProductById(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
+	id, err := uuid.Parse(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "bad request")
 	}
@@ -64,7 +64,7 @@ func (handler *ProductHandler) GetAllProduct(c echo.Context) error {
 }
 
 func (handler *ProductHandler) UpdateProduct(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
+	id, err := uuid.Parse(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "bad request")
 	}
@@ -83,7 +83,7 @@ func (handler *ProductHandler) UpdateProduct(c echo.Context) error {
 }
 
 func (handler *ProductHandler) DeleteProduct(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
+	id, err := uuid.Parse(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "bad request")
 	}
